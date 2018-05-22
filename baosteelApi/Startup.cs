@@ -10,7 +10,7 @@ namespace baosteelApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CheckContext>(opt =>
-                opt.UseInMemoryDatabase("TodoList"));
+                opt.UseSqlServer("Data Source=CNSHI6P1603;Initial Catalog=testBaoSteel;Integrated Security=True"));
             services.AddMvc();
         }
 

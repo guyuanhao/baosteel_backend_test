@@ -12,6 +12,11 @@ namespace baosteelApi.Controllers
     {
         private readonly CheckContext _context;
 
+        public MaintenanceController(CheckContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         public List<MaintenanceItem> GetAll()
         {

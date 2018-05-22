@@ -15,7 +15,7 @@ namespace baosteelApi.Models
 
         public string DETAIL { get; set; }
 
-        public int PERIODE { get; set; }
+        public int PERIOD { get; set; }
 
         public string INDICATION { get; set; }
 
