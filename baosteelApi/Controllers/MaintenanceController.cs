@@ -93,5 +93,19 @@ namespace baosteelApi.Controllers
             return Ok(maintenanceItem);
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            MaintenanceItem maintenanceItem = _context.MAINTENANCE_ITEMS.Find(id);
+            if (maintenanceItem == null)
+            {
+                return NotFound();
+            }
+
+            _context.MAINTENANCE_ITEMS.Remove(maintenanceItem);
+            _context.SaveChanges();
+            return Ok();
+        }
+
     }
 }
