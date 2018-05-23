@@ -21,7 +21,7 @@ namespace baosteelApi.Models
 
         public string INDICATION { get; set; }
 
-        public DateTime CHECK_DATE { get; set; }
+        public Nullable<DateTime> CHECK_DATE { get; set; }
 
         public string RESPONSIBLE { get; set; }
 

@@ -1,33 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using baosteelApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace baosteelApi.Controllers
 {
     [Route("api/[controller]")]
-    public class MaintenanceController : Controller
+    public class InfoController : Controller
     {
         private readonly CheckContext _context;
 
-        public MaintenanceController(CheckContext context)
+        public InfoController(CheckContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public List<MaintenanceItem> GetAll()
+        public List<InfoItem> GetAll()
         {
-            return _context.MAINTENANCE_ITEMS.ToList();
+            return _context.INFO_ITEMS.ToList();
         }
 
-        [HttpGet("{id}", Name = "GetMaintenance_Item")]
+        [HttpGet("{id}", Name = "GetInfo_Item")]
         public IActionResult GetById(int id)
         {
-            var item = _context.MAINTENANCE_ITEMS.Find(id);
-            if(item == null)
+            var item = _context.INFO_ITEMS.Find(id);
+            if (item == null)
             {
                 return NotFound();
             }
@@ -48,61 +50,62 @@ namespace baosteelApi.Controllers
         //}
 
         [HttpPost]
-        public IActionResult Create([FromBody] List<MaintenanceItem> items)
+        public IActionResult Create([FromBody] List<InfoItem> items)
         {
-            List<MaintenanceItem> resluts = new List<MaintenanceItem>();
+            List<InfoItem> resluts = new List<InfoItem>();
             List<IActionResult> actionResults = new List<IActionResult>();
             if (items == null)
             {
                 return BadRequest();
             }
 
-            foreach(MaintenanceItem item in items)
+            foreach (InfoItem item in items)
             {
-                _context.MAINTENANCE_ITEMS.Add(item);
+                _context.INFO_ITEMS.Add(item);
                 _context.SaveChanges();
-                resluts.Add((MaintenanceItem)CreatedAtRoute("GetMaintenance_Item", new { id = item.ID }, item).Value);
+                resluts.Add((InfoItem)CreatedAtRoute("GetInfo_Item", new { id = item.ID }, item).Value);
             }
             return Ok(resluts);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] MaintenanceItem item)
+        public IActionResult Update(int id, [FromBody] InfoItem item)
         {
-            if (item == null )
+            if (item == null)
             {
                 return BadRequest();
             }
 
-            MaintenanceItem maintenanceItem = _context.MAINTENANCE_ITEMS.Find(id);
-            if (maintenanceItem == null)
+            InfoItem infoItem = _context.INFO_ITEMS.Find(id);
+            if (infoItem == null)
             {
                 return NotFound();
             }
 
-            maintenanceItem.INDICATION = item.INDICATION;
-            maintenanceItem.KEY_POINT = item.KEY_POINT;
-            maintenanceItem.NOTE = item.NOTE;
-            maintenanceItem.PERIOD = item.PERIOD;
-            maintenanceItem.PROJECT_NAME = item.PROJECT_NAME;
-            maintenanceItem.RESPONSIBLE = item.RESPONSIBLE;
-            maintenanceItem.DETAIL = item.DETAIL;
+            infoItem.INDICATION = item.INDICATION;
+            infoItem.KEY_POINT = item.KEY_POINT;
+            infoItem.NOTE = item.NOTE;
+            infoItem.CHECK_DATE = item.CHECK_DATE;
+            infoItem.PROJECT_NAME = infoItem.PROJECT_NAME;
+            infoItem.RESPONSIBLE = item.RESPONSIBLE;
+            infoItem.DETAIL = item.DETAIL;
+            infoItem.IF_CHECK = item.IF_CHECK;
 
-            _context.MAINTENANCE_ITEMS.Update(maintenanceItem);
+            _context.INFO_ITEMS.Update(infoItem);
             _context.SaveChanges();
-            return Ok(maintenanceItem);
+            return Ok(infoItem);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            MaintenanceItem maintenanceItem = _context.MAINTENANCE_ITEMS.Find(id);
-            if (maintenanceItem == null)
+            InfoItem infoItem = _context.INFO_ITEMS.Find(id);
+            if (infoItem == null)
             {
                 return NotFound();
             }
 
-            _context.MAINTENANCE_ITEMS.Remove(maintenanceItem);
+            _context.INFO_ITEMS.Remove(infoItem);
             _context.SaveChanges();
             return Ok();
         }
