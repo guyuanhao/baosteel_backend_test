@@ -40,3 +40,6 @@ values ('test35', 'test project maintenance23', 'keyPoint2', 'inidication2',
 
  drop table maintenance_items;
  drop table info_items;
+
+ SET IDENTITY_INSERT maintenance_items ON;
+ SET IDENTITY_INSERT info_items ON;
