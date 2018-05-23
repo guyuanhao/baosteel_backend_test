@@ -17,6 +17,8 @@ namespace baosteelApi.Models
 
         public int PERIOD { get; set; }
 
+        public string KEY_POINT { get; set; }
+
         public string INDICATION { get; set; }
 
         public DateTime CREATE_DATE { get; set; }
