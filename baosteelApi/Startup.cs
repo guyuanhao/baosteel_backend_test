@@ -16,6 +16,10 @@ namespace baosteelApi
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:9000")
+                .AllowAnyHeader()
+            );
             app.UseMvc();
         }
     }
