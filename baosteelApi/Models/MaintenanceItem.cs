@@ -11,7 +11,7 @@ namespace baosteelApi.Models
         [Key]
         public int ID { get; set; }
 
-        public int DEVICE_ID { get; set; }
+        public string DEVICE_ID { get; set; }
 
         public string PROJECT_NAME { get; set; }
 

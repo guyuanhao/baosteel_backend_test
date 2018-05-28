@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace baosteelApi.Models
         [Key]
         public int ID { get; set; }
 
-        public int DEVICE_ID { get; set; }
+        public string DEVICE_ID { get; set; }
 
         public string PROJECT_NAME { get; set; }
 
@@ -28,5 +29,8 @@ namespace baosteelApi.Models
         public Boolean IF_CHECK { get; set; }
 
         public string NOTE { get; set; }
+
+        [ForeignKey("id")]
+        public int MAINTENANCE_ITEM { get; set; }
     }
 }

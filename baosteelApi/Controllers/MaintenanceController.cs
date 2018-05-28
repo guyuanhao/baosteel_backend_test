@@ -34,6 +34,17 @@ namespace baosteelApi.Controllers
             return Ok(item);
         }
 
+        [HttpGet]
+        [Route("getByDeviceId/{id}")]
+        public IActionResult GetByDeviceId(string id)
+        {
+            var items = from m in _context.MAINTENANCE_ITEMS
+                        where m.DEVICE_ID.StartsWith(id)
+                        select m;
+
+            return Ok(items.ToList());
+        }
+
         //[HttpPost]
         //public IActionResult Create([FromBody] MaintenanceItem item)
         //{

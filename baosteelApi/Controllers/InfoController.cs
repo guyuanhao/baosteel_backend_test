@@ -36,6 +36,17 @@ namespace baosteelApi.Controllers
             return Ok(item);
         }
 
+        [HttpGet]
+        [Route("getByDeviceId/{id}")]
+        public IActionResult GetByDeviceId(string id)
+        {
+            var items = from m in _context.INFO_ITEMS
+                        where m.DEVICE_ID.StartsWith(id)
+                        select m;
+
+            return Ok(items.ToList());
+        }
+
         //[HttpPost]
         //public IActionResult Create([FromBody] MaintenanceItem item)
         //{
@@ -90,6 +101,7 @@ namespace baosteelApi.Controllers
             infoItem.RESPONSIBLE = item.RESPONSIBLE;
             infoItem.DETAIL = item.DETAIL;
             infoItem.IF_CHECK = item.IF_CHECK;
+            infoItem.MAINTENANCE_ITEM = item.MAINTENANCE_ITEM;
 
             _context.INFO_ITEMS.Update(infoItem);
             _context.SaveChanges();
