@@ -102,6 +102,7 @@ namespace baosteelApi.Controllers
             infoItem.DETAIL = item.DETAIL;
             infoItem.IF_CHECK = item.IF_CHECK;
             infoItem.MAINTENANCE_ITEM = item.MAINTENANCE_ITEM;
+            infoItem.TARGET_TIME = item.TARGET_TIME;
 
             _context.INFO_ITEMS.Update(infoItem);
             _context.SaveChanges();

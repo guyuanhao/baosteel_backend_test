@@ -22,7 +22,8 @@ create table info_items(
 	responsible varchar(100),
 	if_check bit,
 	note text, 
-	maintenance_item int FOREIGN KEY REFERENCES maintenance_items(id) not null
+	maintenance_item int FOREIGN KEY REFERENCES maintenance_items(id) not null,
+	target_time datetime
 );
 
 insert into maintenance_items(project_name, detail, period, key_point, indication, create_date, responsible, note, device_id) 
@@ -37,9 +38,9 @@ values ('test3', 'test project maintenance23', 'keyPoint2', 'inidication2',
 insert into info_items(project_name, detail, key_point, indication, check_date, responsible,if_check, note, device_id, maintenance_item) 
 values ('test4', 'test project maintenance23', 'keyPoint2', 'inidication2', 
 GETDATE(), 'yuanhao35', 1, 'note2', '501', 1);
-insert into info_items(project_name, detail, key_point, indication, responsible,if_check, note, device_id, maintenance_item) 
+insert into info_items(project_name, detail, key_point, indication, responsible,if_check, note, device_id, maintenance_item,target_time) 
 values ('test35', 'test project maintenance23', 'keyPoint2', 'inidication2', 
- 'yuanhao343', 0, 'note2', '502', 1);
+ 'yuanhao343', 0, 'note2', '502', 1, '2018-06-10 07:16:33.293');
 
  drop table maintenance_items;
  drop table info_items;

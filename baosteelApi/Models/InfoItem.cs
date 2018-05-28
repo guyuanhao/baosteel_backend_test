@@ -24,6 +24,8 @@ namespace baosteelApi.Models
 
         public Nullable<DateTime> CHECK_DATE { get; set; }
 
+        public Nullable<DateTime> TARGET_TIME { get; set; }
+
         public string RESPONSIBLE { get; set; }
 
         public Boolean IF_CHECK { get; set; }
