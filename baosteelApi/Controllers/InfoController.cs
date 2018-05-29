@@ -47,6 +47,17 @@ namespace baosteelApi.Controllers
             return Ok(items.ToList());
         }
 
+        [HttpGet]
+        [Route("checkInfo/{maintenanceId}")]
+        public IActionResult checkInfo(int maintenanceId)
+        {
+            var items = from i in _context.INFO_ITEMS
+                        where i.MAINTENANCE_ITEM.Equals(maintenanceId)
+                        select i;
+
+            return Ok(items.ToList());
+        }
+
         //[HttpPost]
         //public IActionResult Create([FromBody] MaintenanceItem item)
         //{
