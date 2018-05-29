@@ -120,19 +120,19 @@ namespace baosteelApi.Controllers
             return Ok(infoItem);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            InfoItem infoItem = _context.INFO_ITEMS.Find(id);
-            if (infoItem == null)
-            {
-                return NotFound();
-            }
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    InfoItem infoItem = _context.INFO_ITEMS.Find(id);
+        //    if (infoItem == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.INFO_ITEMS.Remove(infoItem);
-            _context.SaveChanges();
-            return Ok();
-        }
+        //    _context.INFO_ITEMS.Remove(infoItem);
+        //    _context.SaveChanges();
+        //    return Ok();
+        //}
 
     }
 }
