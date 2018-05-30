@@ -20,9 +20,27 @@ namespace baosteelApi.Controllers
         }
 
         [HttpGet]
-        public List<InfoItem> GetAll()
+        [Route("GetAll/{option}")]
+        public List<InfoItem> GetAll(string option)
         {
-            return _context.INFO_ITEMS.ToList();
+            if (option.Equals("Checked"))
+            {
+                var items = from i in _context.INFO_ITEMS
+                            where i.IF_CHECK
+                            select i;
+                return items.ToList();
+            }
+            else if (option.Equals("Unchecked"))
+            {
+                var items = from i in _context.INFO_ITEMS
+                            where !i.IF_CHECK
+                            select i;
+                return items.ToList();
+            }
+            else
+            {
+               return _context.INFO_ITEMS.ToList();
+            }
         }
 
         [HttpGet("{id}", Name = "GetInfo_Item")]
@@ -37,14 +55,30 @@ namespace baosteelApi.Controllers
         }
 
         [HttpGet]
-        [Route("getByDeviceId/{id}")]
-        public IActionResult GetByDeviceId(string id)
+        [Route("getByDeviceId/{id}/{option}")]
+        public IActionResult GetByDeviceId(string id, string option)
         {
-            var items = from m in _context.INFO_ITEMS
-                        where m.DEVICE_ID.StartsWith(id)
-                        select m;
-
-            return Ok(items.ToList());
+            if (option.Equals("Checked"))
+            {
+                var items = from m in _context.INFO_ITEMS
+                            where (m.DEVICE_ID.StartsWith(id) && m.IF_CHECK)
+                            select m;
+                return Ok(items.ToList());
+            }
+            else if (option.Equals("Unchecked"))
+            {
+                var items = from m in _context.INFO_ITEMS
+                            where (m.DEVICE_ID.StartsWith(id) && !m.IF_CHECK)
+                            select m;
+                return Ok(items.ToList());
+            }
+            else
+            {
+                var items = from m in _context.INFO_ITEMS
+                            where m.DEVICE_ID.StartsWith(id)
+                            select m;
+                return Ok(items.ToList());
+            }
         }
 
         [HttpGet]
