@@ -104,13 +104,8 @@ namespace baosteelApi.Controllers
                 return NotFound();
             }
 
-            infoItem.INDICATION = item.INDICATION;
-            infoItem.KEY_POINT = item.KEY_POINT;
             infoItem.NOTE = item.NOTE;
             infoItem.CHECK_DATE = item.CHECK_DATE;
-            infoItem.PROJECT_NAME = infoItem.PROJECT_NAME;
-            infoItem.RESPONSIBLE = item.RESPONSIBLE;
-            infoItem.DETAIL = item.DETAIL;
             infoItem.IF_CHECK = item.IF_CHECK;
             infoItem.MAINTENANCE_ITEM = item.MAINTENANCE_ITEM;
             infoItem.TARGET_TIME = item.TARGET_TIME;
