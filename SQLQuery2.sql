@@ -23,6 +23,7 @@ create table info_items(
 	if_check bit,
 	note text, 
 	maintenance_item int FOREIGN KEY REFERENCES maintenance_items(id) not null,
+	attached_file varchar(100),
 	target_time datetime
 );
 

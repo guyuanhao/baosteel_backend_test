@@ -32,6 +32,8 @@ namespace baosteelApi.Models
 
         public string NOTE { get; set; }
 
+        public string ATTACHED_FILE { get; set; }
+
         [ForeignKey("id")]
         public int MAINTENANCE_ITEM { get; set; }
     }

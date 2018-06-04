@@ -167,8 +167,10 @@ namespace baosteelApi.Controllers
 
         [HttpPost]
         [Route("uploadFile")]
-        public async Task<IActionResult> UploadFile(IFormFile file)
+        public async Task<IActionResult> UploadFile(fileItem fileObject)
         {
+            IFormFile file = fileObject.file;
+            int id = fileObject.id;
             if (file == null || file.Length == 0)
                 return Content("file not selected");
             String fileName = DateTime.Now.ToString().Replace(":","").Replace(" ","").Replace("/","") + file.FileName;
@@ -180,10 +182,26 @@ namespace baosteelApi.Controllers
             {
                 await file.CopyToAsync(stream);
             }
+            //delete file
+            InfoItem infoItem = _context.INFO_ITEMS.Find(id);
+            var fileToDelete = Path.Combine(
+                        Directory.GetCurrentDirectory(), "wwwroot",
+                        infoItem.ATTACHED_FILE);
+            if (System.IO.File.Exists(fileToDelete))
+            {
+                System.IO.File.Delete(fileToDelete);
+            }
+
+            //update infoItem
+            infoItem.ATTACHED_FILE = fileName;
+            _context.INFO_ITEMS.Update(infoItem);
+            _context.SaveChanges();
 
             return Ok(fileName);
         }
 
+        [HttpGet]
+        [Route("downloadFile/{filename}")]
         public async Task<IActionResult> Download(string filename)
         {
             if (filename == null)
