@@ -151,6 +151,33 @@ namespace baosteelApi.Controllers
             return Ok(infoItem);
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteFile(int id)
+        {
+            InfoItem infoItem = _context.INFO_ITEMS.Find(id);
+            if (infoItem == null)
+            {
+                return NotFound();
+            }
+            if (infoItem.ATTACHED_FILE != null)
+            {
+                var fileToDelete = Path.Combine(
+                        Directory.GetCurrentDirectory(), "wwwroot",
+                        infoItem.ATTACHED_FILE);
+                if (System.IO.File.Exists(fileToDelete))
+                {
+                    System.IO.File.Delete(fileToDelete);
+                }
+
+                infoItem.ATTACHED_FILE = null;
+
+                _context.INFO_ITEMS.Update(infoItem);
+                _context.SaveChanges();
+            }
+            
+            return Ok();
+        }
+
         //[HttpDelete("{id}")]
         //public IActionResult Delete(int id)
         //{
@@ -184,14 +211,16 @@ namespace baosteelApi.Controllers
             }
             //delete file
             InfoItem infoItem = _context.INFO_ITEMS.Find(id);
-            var fileToDelete = Path.Combine(
+            if (infoItem.ATTACHED_FILE != null)
+            {
+                var fileToDelete = Path.Combine(
                         Directory.GetCurrentDirectory(), "wwwroot",
                         infoItem.ATTACHED_FILE);
-            if (System.IO.File.Exists(fileToDelete))
-            {
-                System.IO.File.Delete(fileToDelete);
+                if (System.IO.File.Exists(fileToDelete))
+                {
+                    System.IO.File.Delete(fileToDelete);
+                }
             }
-
             //update infoItem
             infoItem.ATTACHED_FILE = fileName;
             _context.INFO_ITEMS.Update(infoItem);
