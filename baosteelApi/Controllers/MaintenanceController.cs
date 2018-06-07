@@ -114,6 +114,13 @@ namespace baosteelApi.Controllers
             }
 
             _context.MAINTENANCE_ITEMS.Remove(maintenanceItem);
+            var infoItems = from i in _context.INFO_ITEMS
+                        where i.MAINTENANCE_ITEM.Equals(id)
+                        select i;
+            foreach (InfoItem i in infoItems)
+            {
+                _context.INFO_ITEMS.Remove(i);
+            }
             _context.SaveChanges();
             return Ok();
         }
