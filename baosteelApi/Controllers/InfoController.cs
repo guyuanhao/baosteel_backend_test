@@ -270,7 +270,9 @@ namespace baosteelApi.Controllers
                 {".jpg", "image/jpeg"},
                 {".jpeg", "image/jpeg"},
                 {".gif", "image/gif"},
-                {".csv", "text/csv"}
+                {".csv", "text/csv"},
+                {".ppt",  "application/vnd.ms-powerpoint"},
+                {".pptx",  "application/vnd.openxmlformats-officedocument.presentationml.presentation"}
             };
         }
 
